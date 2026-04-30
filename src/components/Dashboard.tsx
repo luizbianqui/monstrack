@@ -474,13 +474,13 @@ const Dashboard: React.FC<DashboardProps> = ({
               <thead>
                 <tr className="bg-white/5 border-b border-white/5">
                   <th className="w-10 px-4 py-3"></th>
-                  <th className="px-6 py-3 text-[10px] font-black text-gray-400 uppercase tracking-widest">Projeto / Tarefa</th>
-                  <th className="px-6 py-3 text-[10px] font-black text-gray-400 uppercase tracking-widest">Status</th>
-                  <th className="px-6 py-3 text-[10px] font-black text-gray-400 uppercase tracking-widest">Planejamento</th>
-                  <th className="px-6 py-3 text-[10px] font-black text-gray-400 uppercase tracking-widest">Prioridade</th>
-                  <th className="px-6 py-3 text-[10px] font-black text-gray-400 uppercase tracking-widest">Progresso / Data</th>
-                  <th className="px-6 py-3 text-[10px] font-black text-gray-400 uppercase tracking-widest">Responsável</th>
-                  <th className="px-6 py-3 text-[10px] font-black text-gray-400 uppercase tracking-widest text-right">Ações</th>
+                  <th className="px-4 py-3 text-[10px] font-black text-gray-400 uppercase tracking-widest">Projeto / Tarefa</th>
+                  <th className="px-4 py-3 text-[10px] font-black text-gray-400 uppercase tracking-widest">Status</th>
+                  <th className="px-4 py-3 text-[10px] font-black text-gray-400 uppercase tracking-widest">Planejamento</th>
+                  <th className="px-4 py-3 text-[10px] font-black text-gray-400 uppercase tracking-widest">Prioridade</th>
+                  <th className="px-4 py-3 text-[10px] font-black text-gray-400 uppercase tracking-widest">Progresso / Data</th>
+                  <th className="px-4 py-3 text-[10px] font-black text-gray-400 uppercase tracking-widest">Responsável</th>
+                  <th className="px-4 py-3 text-[10px] font-black text-gray-400 uppercase tracking-widest text-right">Ações</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100">
@@ -506,7 +506,7 @@ const Dashboard: React.FC<DashboardProps> = ({
                               </div>
                             )}
                           </td>
-                          <td className="px-6 py-4">
+                          <td className="px-4 py-4">
                             <div 
                               className="flex flex-col cursor-pointer hover:opacity-80 transition-opacity"
                               onClick={(e) => {
@@ -522,7 +522,7 @@ const Dashboard: React.FC<DashboardProps> = ({
                               </span>
                             </div>
                           </td>
-                          <td className="px-6 py-4">
+                          <td className="px-4 py-4">
                             <span className={cn(
                               "px-2.5 py-1 rounded-md text-[9px] font-black uppercase tracking-widest",
                               project.status === "Em andamento" ? "bg-blue-500/10 text-blue-400" :
@@ -534,7 +534,7 @@ const Dashboard: React.FC<DashboardProps> = ({
                               {project.status.toUpperCase()}
                             </span>
                           </td>
-                          <td className="px-6 py-4">
+                          <td className="px-4 py-4">
                           <button 
                             onClick={(e) => {
                               e.stopPropagation();
@@ -557,7 +557,7 @@ const Dashboard: React.FC<DashboardProps> = ({
                             )}
                           </button>
                           </td>
-                          <td className="px-6 py-4">
+                          <td className="px-4 py-4">
                             <span className={cn(
                               "text-[10px] font-black uppercase tracking-widest",
                               project.priority === "Alta" ? "text-red-400" :
@@ -567,7 +567,7 @@ const Dashboard: React.FC<DashboardProps> = ({
                               {project.priority.toUpperCase()}
                             </span>
                           </td>
-                          <td className="px-6 py-4">
+                          <td className="px-4 py-4">
                             <div className="flex items-center gap-3">
                               <div className="flex-1 h-1 bg-white/5 rounded-full overflow-hidden min-w-[70px]">
                                 <div 
@@ -578,7 +578,7 @@ const Dashboard: React.FC<DashboardProps> = ({
                               <span className="text-[10px] font-black text-[#F5F7FA]">{project.progress}%</span>
                             </div>
                           </td>
-                          <td className="px-6 py-4">
+                          <td className="px-4 py-4">
                             <div className="flex items-center gap-2">
                               <div className="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center text-[9px] font-black text-gray-400 uppercase">
                                 {project.owner.split(' ').map(n => n[0]).join('')}
@@ -586,7 +586,7 @@ const Dashboard: React.FC<DashboardProps> = ({
                               <span className="text-[10px] font-black text-gray-400 uppercase tracking-tight">{project.owner.toUpperCase()}</span>
                             </div>
                           </td>
-                          <td className="px-6 py-4 text-right">
+                          <td className="px-4 py-4 text-right">
                             <div className="flex items-center justify-end gap-2">
                               <span className="text-[9px] font-bold text-gray-400 uppercase">{projectTasks.length} TAREFAS</span>
                               <ChevronRight size={14} className="text-gray-300" />
@@ -612,7 +612,7 @@ const Dashboard: React.FC<DashboardProps> = ({
                                   </button>
                                 </div>
                               </td>
-                              <td className="px-6 py-4">
+                              <td className="px-4 py-4">
                                 <div className="flex flex-col">
                                   <span className={cn(
                                     "text-sm font-bold text-[#F5F7FA] tracking-tight",
@@ -625,7 +625,7 @@ const Dashboard: React.FC<DashboardProps> = ({
                                   </span>
                                 </div>
                               </td>
-                              <td className="px-6 py-4">
+                              <td className="px-4 py-4">
                                 <span className={cn(
                                   "px-2.5 py-1 rounded-md text-[9px] font-black uppercase tracking-widest",
                                   task.status === "Concluído" ? "bg-green-500/10 text-green-400" : "bg-blue-500/10 text-blue-400"
@@ -633,7 +633,7 @@ const Dashboard: React.FC<DashboardProps> = ({
                                   {task.status}
                                 </span>
                               </td>
-                              <td className="px-6 py-4">
+                              <td className="px-4 py-4">
                                 <button 
                                   onClick={(e) => {
                                     e.stopPropagation();
@@ -656,7 +656,7 @@ const Dashboard: React.FC<DashboardProps> = ({
                                   )}
                                 </button>
                               </td>
-                              <td className="px-6 py-4">
+                              <td className="px-4 py-4">
                                 <span className={cn(
                                   "text-[10px] font-black uppercase tracking-widest",
                                   task.priority === "Alta" ? "text-red-500" :
@@ -666,12 +666,12 @@ const Dashboard: React.FC<DashboardProps> = ({
                                   {task.priority}
                                 </span>
                               </td>
-                              <td className="px-6 py-4">
+                              <td className="px-4 py-4">
                                 <span className="text-[10px] font-black text-gray-400 tracking-tight">
                                   {format(new Date(task.plannedDate), "dd/MM/yyyy")}
                                 </span>
                               </td>
-                              <td className="px-6 py-4">
+                              <td className="px-4 py-4">
                                 <div className="flex items-center gap-2">
                                   <div className="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center text-[8px] font-black text-gray-400 uppercase">
                                     {task.responsible.split(' ').map(n => n[0]).join('')}
@@ -679,7 +679,7 @@ const Dashboard: React.FC<DashboardProps> = ({
                                   <span className="text-[10px] font-black text-gray-400 uppercase tracking-tight">{task.responsible}</span>
                                 </div>
                               </td>
-                              <td className="px-6 py-4 text-right">
+                              <td className="px-4 py-4 text-right">
                                 <div className="flex items-center justify-end gap-1 opacity-0 group-hover/task:opacity-100 transition-opacity">
                                   <button 
                                     onClick={(e) => { e.stopPropagation(); onEditTask(task); }}
@@ -705,7 +705,7 @@ const Dashboard: React.FC<DashboardProps> = ({
                 {unlinkedTasks.length > 0 && (
                   <React.Fragment>
                     <tr className="bg-white/5">
-                      <td colSpan={8} className="px-6 py-3 text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] border-t border-white/5">
+                      <td colSpan={8} className="px-4 py-3 text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] border-t border-white/5">
                         Tarefas Sem Projeto Vinculado
                       </td>
                     </tr>
@@ -725,7 +725,7 @@ const Dashboard: React.FC<DashboardProps> = ({
                             )} />
                           </button>
                         </td>
-                        <td className="px-6 py-4">
+                        <td className="px-4 py-4">
                           <div className="flex flex-col">
                             <span className={cn(
                               "text-sm font-black text-[#F5F7FA] tracking-tight group-hover/task:text-[#2563EB] transition-colors",
@@ -738,14 +738,15 @@ const Dashboard: React.FC<DashboardProps> = ({
                             </span>
                           </div>
                         </td>
-                        <td className="px-6 py-4">
+                        <td className="px-4 py-4">
                           <span className={cn(
                             "px-2.5 py-1 rounded-md text-[9px] font-black uppercase tracking-widest",
                             task.status === "Concluído" ? "bg-green-500/10 text-green-400" : "bg-blue-500/10 text-blue-400"
                           )}>
                             {task.status}
                           </span>
-                               <td className="px-6 py-4">
+                        </td>
+                        <td className="px-4 py-4">
                           <button 
                             onClick={(e) => {
                               e.stopPropagation();
@@ -768,7 +769,7 @@ const Dashboard: React.FC<DashboardProps> = ({
                             )}
                           </button>
                         </td>
-                        <td className="px-6 py-4">
+                        <td className="px-4 py-4">
                           <span className={cn(
                             "text-[10px] font-black uppercase tracking-widest",
                             task.priority === "Alta" ? "text-red-400" :
@@ -778,20 +779,20 @@ const Dashboard: React.FC<DashboardProps> = ({
                             {task.priority.toUpperCase()}
                           </span>
                         </td>
-                        <td className="px-6 py-4">
+                        <td className="px-4 py-4">
                           <span className="text-[10px] font-black text-gray-400 tracking-tight">
                             {format(new Date(task.plannedDate), "dd/MM/yyyy")}
                           </span>
                         </td>
-                        <td className="px-6 py-4">
+                        <td className="px-4 py-4">
                           <div className="flex items-center gap-2">
                             <div className="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center text-[8px] font-black text-gray-400 uppercase">
                               {task.responsible.split(' ').map(n => n[0]).join('')}
                             </div>
                             <span className="text-[10px] font-black text-gray-400 uppercase tracking-tight">{task.responsible.toUpperCase()}</span>
                           </div>
-                        </td>                      </td>
-                        <td className="px-6 py-4 text-right">
+                        </td>
+                        <td className="px-4 py-4 text-right">
                           <div className="flex items-center justify-end gap-1 opacity-0 group-hover/task:opacity-100 transition-opacity">
                             <button 
                               onClick={(e) => { e.stopPropagation(); onEditTask(task); }}
