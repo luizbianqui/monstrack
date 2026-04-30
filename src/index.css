@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
+
+@theme {
+  --font-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Poppins", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+@layer base {
+  body {
+    @apply font-sans bg-[#0D1220] text-[#F5F7FA] antialiased;
+  }
+}
+
+@layer utilities {
+  .glass-card {
+    @apply bg-[#1E293B]/60 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/20 transition-all duration-300;
+  }
+  
+  .glass-card:hover {
+    @apply border-blue-500/30 shadow-blue-500/10 -translate-y-1;
+  }
+
+  .text-brand {
+    @apply text-[#2563EB];
+  }
+
+  .bg-brand {
+    @apply bg-[#2563EB];
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#F5F7FA] to-[#94A3B8];
+  }
+}
+
+/* Custom Scrollbar */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Premium Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-executive {
+  animation: fadeIn 0.5s ease-out forwards;
+}
