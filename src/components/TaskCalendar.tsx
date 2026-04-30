@@ -84,7 +84,7 @@ const TaskCalendar: React.FC<TaskCalendarProps> = ({ tasks, projects, selectedDa
         ))}
       </div>
 
-      <div className="grid grid-cols-7 gap-px bg-gray-50 border border-gray-50 rounded-xl overflow-hidden shadow-sm">
+      <div className="grid grid-cols-7 gap-px bg-white/5 border border-white/5 rounded-xl overflow-hidden shadow-sm">
         {days.map((day, idx) => {
           const dateTasks = getTasksForDate(day);
           const dateDeadlines = getDeadlinesForDate(day);
