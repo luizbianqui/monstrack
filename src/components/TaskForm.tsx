@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { X, Save, AlertCircle } from "lucide-react";
+import { X, Save, AlertCircle, ArrowUpRight } from "lucide-react";
 import { Task, Priority, Project, Category } from "../types";
 import { PRIORITIES, BOARD_COLUMNS, CATEGORIES } from "../constants";
 import { cn } from "../lib/utils";
@@ -10,9 +10,10 @@ interface TaskFormProps {
   defaultStatus?: string;
   onSave: (task: Omit<Task, "id" | "createdAt">) => void;
   onClose: () => void;
+  onTransformToProject?: (task: Task) => void;
 }
 
-const TaskForm: React.FC<TaskFormProps> = ({ task, projects, defaultStatus, onSave, onClose }) => {
+const TaskForm: React.FC<TaskFormProps> = ({ task, projects, defaultStatus, onSave, onClose, onTransformToProject }) => {
   const [formData, setFormData] = useState({
     title: task?.title || "",
     description: task?.description || "",
@@ -223,21 +224,33 @@ const TaskForm: React.FC<TaskFormProps> = ({ task, projects, defaultStatus, onSa
             />
           </div>
 
-          <div className="pt-6 border-t border-white/5 flex items-center justify-end gap-4">
-            <button 
-              type="button"
-              onClick={onClose}
-              className="px-8 py-3 text-slate-500 hover:text-white transition-all text-[10px] font-black uppercase tracking-widest italic"
-            >
-              Cancelar
-            </button>
-            <button 
-              type="submit"
-              className="px-10 py-4 bg-[#3B82F6] text-white rounded-2xl font-black text-[11px] uppercase tracking-[0.3em] hover:bg-blue-500 transition-all shadow-xl shadow-blue-500/20 flex items-center gap-3 italic"
-            >
-              <Save size={18} />
-              Confirmar Entrega
-            </button>
+          <div className="pt-6 border-t border-white/5 flex items-center justify-between">
+            {task ? (
+              <button
+                type="button"
+                onClick={() => onTransformToProject?.(task)}
+                className="px-4 py-3 text-slate-400 hover:text-[#3B82F6] transition-all text-[10px] font-black uppercase tracking-widest flex items-center gap-2"
+              >
+                <ArrowUpRight size={14} />
+                Transformar em Projeto
+              </button>
+            ) : <div />}
+            <div className="flex items-center gap-4">
+              <button 
+                type="button"
+                onClick={onClose}
+                className="px-8 py-3 text-slate-500 hover:text-white transition-all text-[10px] font-black uppercase tracking-widest italic"
+              >
+                Cancelar
+              </button>
+              <button 
+                type="submit"
+                className="px-10 py-4 bg-[#3B82F6] text-white rounded-2xl font-black text-[11px] uppercase tracking-[0.3em] hover:bg-blue-500 transition-all shadow-xl shadow-blue-500/20 flex items-center gap-3 italic"
+              >
+                <Save size={18} />
+                Confirmar Entrega
+              </button>
+            </div>
           </div>
         </form>
       </div>

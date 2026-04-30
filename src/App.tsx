@@ -513,6 +513,79 @@ const App: React.FC = () => {
     }
   };
 
+  const handleTransformTaskToProject = async (task: Task) => {
+    if (!window.confirm(`Tem certeza que deseja transformar a tarefa "${task.title}" em um projeto? A tarefa será removida.`)) {
+      return;
+    }
+    
+    setIsTaskFormOpen(false);
+    setEditingTask(undefined);
+
+    const previousTasks = [...tasks];
+    const previousProjects = [...projects];
+    const tempId = Math.random().toString(36).substr(2, 9);
+    
+    const newProjectData = {
+        name: task.title,
+        client: task.client || "MonsTrack Strategic",
+        objective: task.objective || task.description || "Projeto transformado a partir de tarefa",
+        expected_result: task.expectedResult || "",
+        status: "Não iniciado",
+        priority: task.priority,
+        category: task.category || "Estratégico",
+        progress: 0,
+        deadline: task.plannedDate,
+        start_date: new Date().toISOString().split('T')[0],
+        next_action: task.nextAction || "",
+        blockers: task.blockers || "",
+        owner: task.responsible,
+        team: task.team || [],
+        weekly_status: task.status === "Backlog" || task.status === "Concluído" ? null : "Backlog da Semana"
+    };
+
+    try {
+      // Optimistic updates
+      setTasks(prev => prev.filter(t => t.id !== task.id));
+      const newProject: Project = { 
+        ...newProjectData, 
+        expectedResult: newProjectData.expected_result,
+        startDate: newProjectData.start_date,
+        nextAction: newProjectData.next_action,
+        weeklyStatus: newProjectData.weekly_status as string | undefined,
+        id: tempId, 
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      } as unknown as Project;
+      setProjects(prev => [newProject, ...prev]);
+
+      // Delete task from DB
+      await supabase.from("tasks").delete().eq("id", task.id);
+
+      // Create Project in DB
+      const { data, error } = await supabase
+        .from("projects")
+        .insert({
+          ...newProjectData,
+          user_id: session?.user?.id
+        })
+        .select()
+        .single();
+      
+      if (error) throw error;
+      
+      if (data) {
+        setProjects(prev => prev.map(p => p.id === tempId ? { ...p, id: data.id } : p));
+        logActivity(data.id, "Projeto criado a partir de uma tarefa", "Criação");
+      }
+      
+    } catch (error) {
+      console.error("Error transforming task:", error);
+      setTasks(previousTasks);
+      setProjects(previousProjects);
+      alert("Erro ao transformar tarefa. Verifique sua conexão.");
+    }
+  };
+
   const handleAddActivity = async (activityData: Omit<Activity, "id">) => {
     if (!selectedProject) return;
     const tempId = Math.random().toString(36).substr(2, 9);
@@ -798,6 +871,7 @@ const App: React.FC = () => {
           projects={projects}
           defaultStatus={defaultTaskStatus}
           onSave={handleSaveTask}
+          onTransformToProject={handleTransformTaskToProject}
           onClose={() => {
             setIsTaskFormOpen(false);
             setEditingTask(undefined);
