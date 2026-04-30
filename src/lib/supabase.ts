@@ -1,6 +1,10 @@
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = 'https://qdrocqdshiglgcecfikg.supabase.co';
-const supabaseAnonKey = 'sb_publishable_IOoJnDKfwgGyOa8IGRHr7Q_dgoo4m4D';
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+if (!supabaseUrl || !supabaseAnonKey) {
+  console.warn("Variáveis de ambiente do Supabase não encontradas. Verifique seu arquivo .env");
+}
+
+export const supabase = createClient(supabaseUrl || '', supabaseAnonKey || '');

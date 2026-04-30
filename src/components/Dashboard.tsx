@@ -604,10 +604,10 @@ const Dashboard: React.FC<DashboardProps> = ({
                                 <div className="flex items-center justify-center ml-4">
                                   <button 
                                     onClick={(e) => { e.stopPropagation(); onToggleTask(task); }}
-                                    className="p-1 hover:bg-gray-200 rounded transition-colors"
+                                    className="p-1 hover:bg-white/10 rounded transition-colors"
                                   >
                                     <CheckSquare size={16} className={cn(
-                                      task.completed ? "text-green-500" : "text-gray-300 hover:text-gray-400"
+                                      task.completed ? "text-green-500" : "text-gray-500 hover:text-gray-300"
                                     )} />
                                   </button>
                                 </div>
@@ -615,8 +615,8 @@ const Dashboard: React.FC<DashboardProps> = ({
                               <td className="px-6 py-4">
                                 <div className="flex flex-col">
                                   <span className={cn(
-                                    "text-sm font-bold text-gray-600 tracking-tight",
-                                    task.completed && "line-through text-gray-400 font-medium"
+                                    "text-sm font-bold text-[#F5F7FA] tracking-tight",
+                                    task.completed && "line-through text-gray-500 font-medium"
                                   )}>
                                     {task.title}
                                   </span>
@@ -628,7 +628,7 @@ const Dashboard: React.FC<DashboardProps> = ({
                               <td className="px-6 py-4">
                                 <span className={cn(
                                   "px-2.5 py-1 rounded-md text-[9px] font-black uppercase tracking-widest",
-                                  task.status === "Concluído" ? "bg-green-50 text-green-500" : "bg-blue-50 text-blue-500"
+                                  task.status === "Concluído" ? "bg-green-500/10 text-green-400" : "bg-blue-500/10 text-blue-400"
                                 )}>
                                   {task.status}
                                 </span>
@@ -642,8 +642,8 @@ const Dashboard: React.FC<DashboardProps> = ({
                                   className={cn(
                                     "flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg transition-all text-[9px] font-black uppercase tracking-[0.1em] border min-w-[90px]",
                                     (task.status !== "Backlog" && task.status !== "Concluído")
-                                      ? "bg-[#F27D26] text-white border-[#F27D26] shadow-sm" 
-                                      : "bg-[#F5F5F5] text-gray-400 border-transparent hover:bg-gray-200"
+                                      ? "bg-[#2563EB] text-white border-[#2563EB] shadow-lg shadow-blue-500/20" 
+                                      : "bg-white/5 text-gray-400 border-transparent hover:bg-white/10 hover:text-white"
                                   )}
                                 >
                                   {(task.status !== "Backlog" && task.status !== "Concluído") ? (
@@ -673,23 +673,23 @@ const Dashboard: React.FC<DashboardProps> = ({
                               </td>
                               <td className="px-6 py-4">
                                 <div className="flex items-center gap-2">
-                                  <div className="w-5 h-5 rounded-full bg-gray-100 flex items-center justify-center text-[8px] font-black text-gray-400 uppercase">
+                                  <div className="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center text-[8px] font-black text-gray-400 uppercase">
                                     {task.responsible.split(' ').map(n => n[0]).join('')}
                                   </div>
-                                  <span className="text-[10px] font-black text-gray-500 uppercase tracking-tight">{task.responsible}</span>
+                                  <span className="text-[10px] font-black text-gray-400 uppercase tracking-tight">{task.responsible}</span>
                                 </div>
                               </td>
                               <td className="px-6 py-4 text-right">
                                 <div className="flex items-center justify-end gap-1 opacity-0 group-hover/task:opacity-100 transition-opacity">
                                   <button 
                                     onClick={(e) => { e.stopPropagation(); onEditTask(task); }}
-                                    className="p-1 hover:bg-gray-200 rounded text-gray-400 hover:text-gray-600"
+                                    className="p-1 hover:bg-white/10 rounded text-gray-400 hover:text-white transition-colors"
                                   >
                                     <ExternalLink size={14} />
                                   </button>
                                   <button 
                                     onClick={(e) => { e.stopPropagation(); onDeleteTask(task.id); }}
-                                    className="p-1 hover:bg-gray-200 rounded text-gray-400 hover:text-red-500"
+                                    className="p-1 hover:bg-white/10 rounded text-gray-400 hover:text-red-400 transition-colors"
                                   >
                                     <Trash2 size={14} />
                                   </button>
@@ -704,32 +704,32 @@ const Dashboard: React.FC<DashboardProps> = ({
 
                 {unlinkedTasks.length > 0 && (
                   <React.Fragment>
-                    <tr className="bg-[#F5F5F5]/50">
-                      <td colSpan={8} className="px-6 py-3 text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] border-t border-gray-100">
+                    <tr className="bg-white/5">
+                      <td colSpan={8} className="px-6 py-3 text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] border-t border-white/5">
                         Tarefas Sem Projeto Vinculado
                       </td>
                     </tr>
                     {unlinkedTasks.map((task) => (
                       <tr 
                         key={task.id} 
-                        className="hover:bg-gray-100/50 transition-colors group/task cursor-pointer border-b border-gray-50"
+                        className="bg-white/5 hover:bg-white/10 transition-colors group/task cursor-pointer border-b border-white/5"
                         onClick={() => onEditTask(task)}
                       >
                         <td className="px-4 py-4 text-center">
                           <button 
                             onClick={(e) => { e.stopPropagation(); onToggleTask(task); }}
-                            className="p-1 hover:bg-gray-200 rounded transition-colors"
+                            className="p-1 hover:bg-white/10 rounded transition-colors"
                           >
                             <CheckSquare size={18} className={cn(
-                              task.completed ? "text-green-500" : "text-gray-300 hover:text-gray-400"
+                              task.completed ? "text-green-500" : "text-gray-500 hover:text-gray-300"
                             )} />
                           </button>
                         </td>
                         <td className="px-6 py-4">
                           <div className="flex flex-col">
                             <span className={cn(
-                              "text-sm font-black text-[#141414] tracking-tight group-hover/task:text-[#F27D26] transition-colors",
-                              task.completed && "line-through text-gray-400 font-medium"
+                              "text-sm font-black text-[#F5F7FA] tracking-tight group-hover/task:text-[#2563EB] transition-colors",
+                              task.completed && "line-through text-gray-500 font-medium"
                             )}>
                               {task.title}
                             </span>
@@ -741,7 +741,7 @@ const Dashboard: React.FC<DashboardProps> = ({
                         <td className="px-6 py-4">
                           <span className={cn(
                             "px-2.5 py-1 rounded-md text-[9px] font-black uppercase tracking-widest",
-                            task.status === "Concluído" ? "bg-green-50 text-green-500" : "bg-blue-50 text-blue-500"
+                            task.status === "Concluído" ? "bg-green-500/10 text-green-400" : "bg-blue-500/10 text-blue-400"
                           )}>
                             {task.status}
                           </span>
@@ -755,7 +755,7 @@ const Dashboard: React.FC<DashboardProps> = ({
                               "flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg transition-all text-[9px] font-black uppercase tracking-[0.1em] border min-w-[90px]",
                               (task.status !== "Backlog" && task.status !== "Concluído")
                                 ? "bg-[#2563EB] text-white border-[#2563EB] shadow-lg shadow-blue-500/20" 
-                                : "bg-white/5 text-gray-400 border-transparent hover:bg-white/10"
+                                : "bg-white/5 text-gray-400 border-transparent hover:bg-white/10 hover:text-white"
                             )}
                           >
                             {(task.status !== "Backlog" && task.status !== "Concluído") ? (
@@ -795,13 +795,13 @@ const Dashboard: React.FC<DashboardProps> = ({
                           <div className="flex items-center justify-end gap-1 opacity-0 group-hover/task:opacity-100 transition-opacity">
                             <button 
                               onClick={(e) => { e.stopPropagation(); onEditTask(task); }}
-                              className="p-1 hover:bg-gray-200 rounded text-gray-400 hover:text-gray-600"
+                              className="p-1 hover:bg-white/10 rounded text-gray-400 hover:text-white transition-colors"
                             >
                               <ExternalLink size={14} />
                             </button>
                             <button 
                               onClick={(e) => { e.stopPropagation(); onDeleteTask(task.id); }}
-                              className="p-1 hover:bg-gray-200 rounded text-gray-400 hover:text-red-500"
+                              className="p-1 hover:bg-white/10 rounded text-gray-400 hover:text-red-400 transition-colors"
                             >
                               <Trash2 size={14} />
                             </button>
